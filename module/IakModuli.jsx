@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import IakVositalar from './IakVositalar'
 
 // ============================================================================
 // Natijalarni yig'uvchi Google Form havolasi.
@@ -257,6 +258,9 @@ export default function IakModuli() {
           <p><span className='font-bold text-blue-950'>Darajalar:</span> 0,00–0,49 past; 0,50–0,74 o'rta; 0,75–1,00 yuqori.</p>
         </div>
       </section>
+
+      {/* Interaktiv vositalar */}
+      <IakVositalar />
 
       {/* Natijani topshirish */}
       <section className='p-5 sm:p-8 bg-blue-600 rounded-[2rem] text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5 text-left'>
