@@ -1,5 +1,6 @@
 "use client"
 import React, { useMemo, useState } from 'react'
+import { natijaYuborish, natijaYuborishMumkin } from './iakNatija'
 
 // ============================================================================
 // IAK moduli uchun interaktiv vositalar:
@@ -39,6 +40,26 @@ async function excelYuklash(fayl, varaq, qatorlar) {
   const d = new Date()
   const p = (n) => String(n).padStart(2, '0')
   XLSX.writeFile(wb, `${fayl}_${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.xlsx`)
+}
+
+// "Natijani yuborish" tugmasi: faqat Google Sheets manzili sozlangan bo'lsa ko'rinadi.
+function YuborTugma({ tur, xulosa, tafsilot, tayyor = true }) {
+  const [holat, setHolat] = useState('') // '', 'yuborilmoqda', 'ok', 'xato'
+  if (!natijaYuborishMumkin) return null
+  const bos = async () => {
+    setHolat('yuborilmoqda')
+    const ok = await natijaYuborish(tur, xulosa, tafsilot)
+    setHolat(ok ? 'ok' : 'xato')
+  }
+  return (
+    <span className='inline-flex items-center gap-3'>
+      <button type='button' className={btnCls} disabled={!tayyor || holat === 'yuborilmoqda'} onClick={bos}>
+        {holat === 'yuborilmoqda' ? 'Yuborilmoqda...' : "Natijani o'qituvchiga yuborish"}
+      </button>
+      {holat === 'ok' && <span className='text-sm font-bold text-green-700'>Yuborildi</span>}
+      {holat === 'xato' && <span className='text-sm font-bold text-red-700'>Yuborib bo'lmadi, internetni tekshiring</span>}
+    </span>
+  )
 }
 
 function SectionTitle({ children }) {
@@ -132,6 +153,12 @@ function ManbaBaholash() {
         >
           Excel'ga yuklab olish
         </button>
+        <YuborTugma
+          tur='iak-manba'
+          xulosa={`${rows.length} ta manba; o'rtacha ${(rows.reduce((a, m) => a + jami(m), 0) / rows.length).toFixed(1)} / 10`}
+          tafsilot={rows.map((m) => ({ nomi: m.nomi, ...Object.fromEntries(MEZONLAR.map(([k]) => [k, Number(m[k])])), jami: jami(m) }))}
+          tayyor={rows.some((m) => m.nomi.trim())}
+        />
       </div>
     </div>
   )
@@ -228,6 +255,12 @@ function VerifikatsiyaKalkulyatori() {
         >
           Excel'ga yuklab olish
         </button>
+        <YuborTugma
+          tur='iak-verifikatsiya'
+          xulosa={`Tekshirilgan: ${tekshirilgan}, xato: ${xatolar}, chegara: ${chegara}%`}
+          tafsilot={rows.map((r, i) => ({ davo: r.davo, ai: r.ai, manba: r.manba, manbaNomi: r.manbaNomi, holat: hisob[i].holat, farq: hisob[i].farq != null ? Number(hisob[i].farq.toFixed(2)) : null, tur: r.tur }))}
+          tayyor={tekshirilgan > 0}
+        />
       </div>
       <div className='bg-blue-50/40 border border-blue-100 rounded-2xl p-5 text-sm text-blue-900/80 leading-relaxed text-left space-y-1.5'>
         <p><span className='font-bold text-blue-950'>Tekshirilgan da'volar:</span> {tekshirilgan}; <span className='font-bold text-blue-950'>topilgan xatolar:</span> {xatolar}</p>
@@ -306,6 +339,7 @@ function IndeksKalkulyatori() {
         <p className='text-sm text-blue-900/80'>
           <span className='font-bold text-blue-950'>Keyingi qadam:</span> {indeksTavsiyasi(idx)}
         </p>
+        <div className='flex flex-wrap items-center gap-3'>
         <button
           type='button'
           className={btnGhostCls}
@@ -322,6 +356,12 @@ function IndeksKalkulyatori() {
         >
           Excel'ga yuklab olish
         </button>
+        <YuborTugma
+          tur='iak-indeks'
+          xulosa={`IAK = ${idx.toFixed(2)} (${d.t})`}
+          tafsilot={{ ...Object.fromEntries(KOMPONENTLAR.map(([k]) => [k, Number(b[k])])), indeks: Number(idx.toFixed(2)), daraja: d.t }}
+        />
+        </div>
       </div>
     </div>
   )

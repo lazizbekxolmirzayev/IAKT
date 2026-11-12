@@ -29,3 +29,8 @@ export const STATS_PIN_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459
 export const LOGIN_ENDPOINT = "";
 // Apps Script ichidagi READ_KEY bilan bir xil bo'lgan maxfiy kalit (ro'yxatni o'qish uchun).
 export const LOGIN_READ_KEY = "";
+
+// 5) IAK moduli natijalarini yuborish manzili (Google Apps Script). Odatda kirishlar uchun ishlatilgan
+//    manzilning o'zi: Apps Script kodini GOOGLE_SHEETS_ULASH.md dagi yangi versiyaga almashtiring.
+//    Bo'sh bo'lsa, IAK moduli sahifasida "Natijani yuborish" tugmasi ko'rinmaydi.
+export const IAK_ENDPOINT = LOGIN_ENDPOINT;

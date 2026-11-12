@@ -17,10 +17,21 @@ Saytga kirgan talabalarning ism-familiyasini barcha qurilmalardan bitta jadvalga
 
 Kodni o'zgartirsangiz, Apps Script'da yana **Joylashtirish → Joylashtirishlarni boshqarish → Yangi versiya** qiling.
 
+## IAK natijalarini yig'ish
+
+Talaba IAK moduli sahifasida «Natijani o'qituvchiga yuborish» tugmasini bossa, natija shu jadvalning
+**IAK natijalari** varag'iga yoziladi (vaqt, talaba ismi, tur, qisqa xulosa, tafsilot).
+Qo'shimcha manzil kerak emas: `module/statsConfig.js` dagi `IAK_ENDPOINT` avtomatik `LOGIN_ENDPOINT` bilan bir xil.
+
+Agar kirishlar uchun skriptni avval sozlagan bo'lsangiz, faqat quyidagi yangi kodni Apps Script'ga qo'ying va
+**Joylashtirish → Joylashtirishlarni boshqarish → Yangi versiya** qiling. Manzil o'zgarmaydi.
+`LOGIN_ENDPOINT` bo'sh bo'lsa, tugma saytda ko'rinmaydi.
+
 ## Apps Script kodi
 
 ```javascript
 const SHEET_NAME = 'Kirishlar';
+const IAK_SHEET_NAME = 'IAK natijalari';
 const READ_KEY = 'BU_YERGA_MAXFIY_SOZ_YOZING';
 
 function getSheet_() {
@@ -31,9 +42,17 @@ function getSheet_() {
   return sh;
 }
 
+function getIakSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName(IAK_SHEET_NAME);
+  if (!sh) sh = ss.insertSheet(IAK_SHEET_NAME);
+  if (sh.getLastRow() === 0) sh.appendRow(['Vaqt', 'Talaba', 'Tur', 'Xulosa', 'Tafsilot (JSON)']);
+  return sh;
+}
+
 // Formula yuborib yuborishdan himoya: = + - @ bilan boshlansa, oldiga ' qo'yiladi
-function clean_(v) {
-  let s = String(v || '').trim().slice(0, 60);
+function clean_(v, max) {
+  let s = String(v || '').trim().slice(0, max || 60);
   if (/^[=+\-@]/.test(s)) s = "'" + s;
   return s;
 }
@@ -41,8 +60,23 @@ function clean_(v) {
 function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
-    const ism = clean_(d.ism), fam = clean_(d.familiya);
-    if (ism && fam) getSheet_().appendRow([String(d.vaqt || new Date().toISOString()), ism, fam]);
+    if (d.tur) {
+      // IAK moduli natijasi
+      const tur = clean_(d.tur, 40);
+      const talaba = clean_(d.talaba, 120);
+      if (tur && talaba) {
+        getIakSheet_().appendRow([
+          String(d.vaqt || new Date().toISOString()),
+          talaba,
+          tur,
+          clean_(d.xulosa, 300),
+          clean_(d.tafsilot, 4000),
+        ]);
+      }
+    } else {
+      const ism = clean_(d.ism), fam = clean_(d.familiya);
+      if (ism && fam) getSheet_().appendRow([String(d.vaqt || new Date().toISOString()), ism, fam]);
+    }
   } catch (err) {}
   return ContentService.createTextOutput('ok');
 }
@@ -64,4 +98,5 @@ function doGet(e) {
 
 - `LOGIN_READ_KEY` sayt kodida turadi, shuning uchun u haqiqiy sir emas. Ro'yxatni asosan Google
   Sheets'ning o'zidan (Fayl → Yuklab olish → Excel) ham olish mumkin.
-- Ism-familiya shaxsiy ma'lumot hisoblanadi: talabalarga ular qayd etilishini ayting.
+- Ism-familiya va IAK natijalari shaxsiy ma'lumot hisoblanadi: talabalarga ular qayd etilishini ayting.
+- Yuborilgan natijani brauzer o'qiy olmaydi (`no-cors`), shuning uchun «Yuborildi» yozuvi faqat so'rov jo'natilganini bildiradi. Ishonch uchun jadvalni tekshiring.
