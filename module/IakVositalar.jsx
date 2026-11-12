@@ -30,6 +30,17 @@ const inputCls = 'w-full bg-white border border-blue-100 rounded-lg px-3 py-2 te
 const btnCls = 'px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 active:scale-95 transition-all'
 const btnGhostCls = 'px-4 py-2 rounded-lg bg-white border border-blue-100 text-blue-700 text-sm font-bold hover:bg-blue-50 active:scale-95 transition-all'
 
+// Jadvalni Excel (.xlsx) fayliga yuklab olish. Kutubxona faqat tugma bosilganda yuklanadi.
+async function excelYuklash(fayl, varaq, qatorlar) {
+  const XLSX = await import('xlsx')
+  const ws = XLSX.utils.aoa_to_sheet(qatorlar)
+  const wb = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb, ws, varaq)
+  const d = new Date()
+  const p = (n) => String(n).padStart(2, '0')
+  XLSX.writeFile(wb, `${fayl}_${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.xlsx`)
+}
+
 function SectionTitle({ children }) {
   return (
     <div className='flex items-center gap-3 select-none'>
@@ -109,6 +120,18 @@ function ManbaBaholash() {
       <div className='flex flex-wrap gap-3'>
         <button type='button' className={btnCls} onClick={() => setRows((r) => [...r, yangiManba()])}>Manba qo'shish</button>
         <button type='button' className={btnGhostCls} onClick={() => setRows([yangiManba(), yangiManba(), yangiManba()])}>Tozalash</button>
+        <button
+          type='button'
+          className={btnGhostCls}
+          onClick={() =>
+            excelYuklash('IAK_manbalar_saralash', 'Manbalarni saralash', [
+              ['Manba', ...MEZONLAR.map(([, l]) => l), 'Jami (10)', 'Daraja'],
+              ...rows.map((m) => [m.nomi, ...MEZONLAR.map(([k]) => Number(m[k])), jami(m), manbaDarajasi(jami(m)).t]),
+            ])
+          }
+        >
+          Excel'ga yuklab olish
+        </button>
       </div>
     </div>
   )
@@ -187,6 +210,24 @@ function VerifikatsiyaKalkulyatori() {
       <div className='flex flex-wrap gap-3'>
         <button type='button' className={btnCls} onClick={() => setRows((r) => [...r, yangiDavo()])}>Da'vo qo'shish</button>
         <button type='button' className={btnGhostCls} onClick={() => setRows([yangiDavo(), yangiDavo(), yangiDavo()])}>Tozalash</button>
+        <button
+          type='button'
+          className={btnGhostCls}
+          onClick={() =>
+            excelYuklash('IAK_verifikatsiya', 'Verifikatsiya', [
+              ["Da'vo", 'AI qiymati', 'Manba qiymati', 'Manba nomi', 'Farq, %', 'Holat', 'Xato turi'],
+              ...rows.map((r, i) => {
+                const h = hisob[i]
+                const holat = h.holat === 'xato' ? 'Xato' : h.holat === 'togri' ? "Chegara ichida" : h.holat === 'nol' ? "Qo'lda baholang" : 'Tekshirilmagan'
+                return [r.davo, raqam(r.ai) || r.ai, raqam(r.manba) || r.manba, r.manbaNomi, h.farq != null ? Number(h.farq.toFixed(2)) : '', holat, h.holat === 'xato' ? r.tur : '']
+              }),
+              [],
+              ['Chegara, %', Number.isNaN(ch) ? '' : ch, "Tekshirilgan da'vo", tekshirilgan, 'Xatolar', xatolar],
+            ])
+          }
+        >
+          Excel'ga yuklab olish
+        </button>
       </div>
       <div className='bg-blue-50/40 border border-blue-100 rounded-2xl p-5 text-sm text-blue-900/80 leading-relaxed text-left space-y-1.5'>
         <p><span className='font-bold text-blue-950'>Tekshirilgan da'volar:</span> {tekshirilgan}; <span className='font-bold text-blue-950'>topilgan xatolar:</span> {xatolar}</p>
@@ -219,6 +260,13 @@ function indeksDarajasi(x) {
   if (x >= 0.75) return { t: 'Yuqori daraja', c: 'text-green-700 bg-green-50 border-green-200' }
   if (x >= 0.5) return { t: "O'rta daraja", c: 'text-yellow-700 bg-yellow-50 border-yellow-200' }
   return { t: 'Past daraja', c: 'text-red-700 bg-red-50 border-red-200' }
+}
+
+// Daraja bo'yicha topshiriq qiyinligi tavsiyasi (differensiatsiya). Tavsiya xarakterida.
+function indeksTavsiyasi(x) {
+  if (x >= 0.75) return "murakkabroq topshiriq: boshqa kasbiy vaziyat kartasi yoki 3 dan ortiq manba bilan qarama-qarshi ma'lumotlarni solishtirish.";
+  if (x >= 0.5) return "o'sha vaziyat kartasida eng past mezon bo'yicha topshiriqni qayta bajaring va o'qituvchi izohlarini hisobga oling.";
+  return "soddalashtirilgan topshiriq: 3 ta manba va 3 ta da'vo bilan boshlang, har bosqichni o'qituvchi bilan birga tekshiring.";
 }
 
 function IndeksKalkulyatori() {
@@ -255,6 +303,25 @@ function IndeksKalkulyatori() {
             <span className='font-bold text-blue-950'>Eng past komponent:</span> {past.join(', ')}. Shu bosqichni takrorlash tavsiya etiladi.
           </p>
         )}
+        <p className='text-sm text-blue-900/80'>
+          <span className='font-bold text-blue-950'>Keyingi qadam:</span> {indeksTavsiyasi(idx)}
+        </p>
+        <button
+          type='button'
+          className={btnGhostCls}
+          onClick={() =>
+            excelYuklash('IAK_indeks', 'IAK indeksi', [
+              ['Komponent', 'Ball (0–2)'],
+              ...KOMPONENTLAR.map(([k, n]) => [`${k}: ${n}`, Number(b[k])]),
+              [],
+              ['Jami', sum],
+              ['IAK indeksi', Number(idx.toFixed(2))],
+              ['Daraja', d.t],
+            ])
+          }
+        >
+          Excel'ga yuklab olish
+        </button>
       </div>
     </div>
   )
