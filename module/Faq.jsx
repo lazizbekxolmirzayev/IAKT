@@ -27,7 +27,7 @@ export default function Faq() {
               },
               {
                 q: "Ma'ruza matnlarini yuklab olish imkoniyati bormi?",
-                a: "Ha, har bir modul sahifasida o'sha mavzuga oid to'liq ma'ruza matni va taqdimotni PDF formatida yuklab olish tugmasi mavjud."
+                a: "«Ma'ruza» sahifasida har bir mavzuning to'liq ma'ruza matni (PDF) va taqdimoti joylashgan. Ular Google Drive'da ochiladi, kerak bo'lsa u yerdan yuklab olishingiz mumkin."
               },
               {
                 q: "Laboratoriya ishlari uchun qanday dasturlar kerak?",

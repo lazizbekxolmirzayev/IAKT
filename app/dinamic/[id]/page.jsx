@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 // Next.js static export uchun dinamik sahifalarda yaratiladigan yo'nalishlar.
 export function generateStaticParams() {
@@ -398,7 +399,7 @@ export default async function DynamicContentPage({ params }) {
       content: (
         <div className="space-y-6 text-slate-700 leading-relaxed text-base sm:text-lg">
           <p>
-            Statistik ma’lumotlar iqtisodiy qarorlar qabul qilish va turli jarayonlarni baholashda keng qo‘llaniladi. Davlat tashkilotlari, korxonalar va tadqiqotchilar statistik ko‘rsatkichlardan foydalanidilar.
+            Statistik ma’lumotlar iqtisodiy qarorlar qabul qilish va turli jarayonlarni baholashda keng qo‘llaniladi. Davlat tashkilotlari, korxonalar va tadqiqotchilar statistik ko‘rsatkichlardan foydalanadilar.
           </p>
           <div className="p-6 bg-slate-100 rounded-3xl border border-slate-200">
              Davlat iqtisodiy o‘sish, inflyatsiya, aholi daromadlari va ishsizlik kabi ko‘rsatkichlarni tahlil qilib, kelajakdagi iqtisodiy siyosatni belgilaydi.
@@ -426,13 +427,13 @@ export default async function DynamicContentPage({ params }) {
     <main className="min-h-screen bg-slate-50 pt-24 pb-16 px-2 sm:px-6 max-w-6xl mx-auto space-y-6">
       
       {/* Ortga qaytish tugmasi */}
-      <a
+      <Link
         href="/"
         className="text-xs font-bold text-slate-600 hover:text-blue-600 transition flex items-center gap-2 cursor-pointer bg-white px-5 py-3 rounded-2xl border border-slate-200/80 shadow-sm w-fit active:scale-95"
       >
         <span>⬅️</span>
         <span>Asosiy sahifaga qaytish</span>
-      </a>
+      </Link>
 
       {/* Asosiy Kartochka */}
       <div className="bg-white p-6 sm:p-10 rounded-[2.5rem] border border-slate-100 shadow-md space-y-6 w-full">

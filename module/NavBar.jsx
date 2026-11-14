@@ -43,7 +43,7 @@ export default function NavBar() {
                 alt="Logo"
                 fill
                 priority
-                sizes="(max-w-768px) 160px, 220px"
+                sizes="(max-width: 768px) 160px, 220px"
                 className="object-contain invert brightness-0" 
                 style={{ objectPosition: 'left center' }}
               />

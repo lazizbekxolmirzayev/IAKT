@@ -5,7 +5,7 @@ import React from 'react';
 // 📚 FANGA OID ADABIYOTLAR MASSIVI (Optimizatsiya qilingan format)
 // ============================================================================
 const literatureBooks = [
-  { id: 1, title: "Iqtisodiyotda axborot-kommunikatsiya texnologiyalari va tizimlar ", author: "Rajabov Asliddin Xolmirzayevich", type: "O'quv qo'llanma", link: "#" },
+  { id: 1, title: "Iqtisodiyotda axborot-kommunikatsiya texnologiyalari va tizimlar", author: "Rajabov Asliddin Xolmirzayevich", type: "O'quv qo'llanma", link: "#" },
   { id: 2, title: "Iqtisodiyotda axborot-kommunikatsiya texnologiyalari va tizimlar", author: "Shoaxmedova N.X., Abdullaeva I.M.", type: "O'quv qo'llanma", link: "https://drive.google.com/file/d/1GREoEyMF8wGtjGRTeq_Cbzn5Aec_9jCw/view" },
   { id: 3, title: "Raqamli iqtisodiyot va elektron tijoratda yangi texnologiyalar", author: "Ravshan Hamdamovich Ayupov", type: "O'quv qo'llanma", link: "https://drive.google.com/file/u/0/d/1LDapW7-SmIeODzXw1MMN7p5LjwbKoSCT/view" },
   { id: 4, title: "Iqtisodiyotda axborot texnologiyalari", author: "R.X.Alimov, B.A.Begalov, G.T.Yulchiyeva, Sh.Alishev", type: "Darslik", link: "https://drive.google.com/file/d/10j_cMxiIiABmsPeyJEQ7LrNhQqLsBDDM/view" },

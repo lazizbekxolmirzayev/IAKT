@@ -1,5 +1,6 @@
 "use client"
 import React from 'react';
+import Link from 'next/link';
 
 // ============================================================================
 // 📊 NAZORAT TESTLARI MASSIVI (Tuzatilgan va optimallashtirilgan variant)
@@ -121,7 +122,7 @@ export default function NazoratPage() {
 
       {/* Eslatma: test mavzulari tartibi */}
       <div className="p-5 sm:p-6 bg-blue-50/40 border border-blue-100 rounded-2xl text-left text-sm text-blue-900/80 leading-relaxed">
-        <strong className="text-blue-600 font-bold">Eslatma:</strong> test mavzulari fan dasturi tartibida berilgan, shuning uchun ularning tartibi ma'ruza va laboratoriya mashg'ulotlari tartibidan farq qilishi mumkin. Iqtisodiy axborot bilan ishlash ko'nikmalari <a href="/iak-moduli" className="text-blue-600 font-semibold underline">IAK moduli</a> topshiriqlari orqali baholanadi.
+        <strong className="text-blue-600 font-bold">Eslatma:</strong> test mavzulari fan dasturi tartibida berilgan, shuning uchun ularning tartibi ma'ruza va laboratoriya mashg'ulotlari tartibidan farq qilishi mumkin. Iqtisodiy axborot bilan ishlash ko'nikmalari <Link href="/iak-moduli" className="text-blue-600 font-semibold underline">IAK moduli</Link> topshiriqlari orqali baholanadi.
       </div>
 
      

@@ -90,9 +90,9 @@ export default function MainContent() {
       color: "bg-blue-500",
       description: "Raqamli iqtisodiyotning makro va mikroiqtisodiy asoslari hamda global bozor tendensiyalari.",
       topics: [
-        { id: "1-1", title: "1-mavzu: Raqamli iqtisodiyot nima?", desc: "Raqamli iqtisodiyot tushunchasi va an'anaviy iqtisodiyotdan farqlari." },
-        { id: "1-2", title: "2-mavzu: Elektron biznes va raqamli bozorlar", desc: "E-commerce modellari va onlayn tijorat ekotizimi." },
-        { id: "1-3", title: "3-mavzu: Raqamli transformatsiya va biznes", desc: "Biznes jarayonlarini raqamlashtirish va korporativ strategiyalar." }
+        { id: "1-1", title: "1-mavzu: Raqamli iqtisodiyotning asosiy tushunchalari", desc: "Raqamli iqtisodiyot nima va u qanday afzalliklar beradi." },
+        { id: "1-2", title: "2-mavzu: Raqamli iqtisodiyotning makro va mikroiqtisodiy asoslari", desc: "Raqamli texnologiyalarning korxona va butun mamlakat iqtisodiyotiga ta'siri." },
+        { id: "1-3", title: "3-mavzu: Global bozor tendensiyalari", desc: "Internet orqali xalqaro bozorga chiqish va raqobat." }
       ]
     },
     { 
@@ -102,9 +102,9 @@ export default function MainContent() {
       color: "bg-purple-500",
       description: "Zamonaviy dasturiy ta'minot, bulutli texnologiyalar va kiberxavfsizlik.",
       topics: [
-        { id: "2-1", title: "1-mavzu: Bulutli hisoblash texnologiyalari", desc: "Cloud Computing modellari va iqtisodiy foydalari." },
-        { id: "2-2", title: "2-mavzu: Sun'iy intellekt va neyron tarmoqlar", desc: "AI va Machine Learning iqtisodiyot tarmoqlarida." },
-        { id: "2-3", title: "3-mavzu: Axborot xavfsizligi asoslari", desc: "Kiberxavfsizlik va axborotni muhofaza qilish usullari." }
+        { id: "2-1", title: "1-mavzu: Zamonaviy dasturiy ta’minot", desc: "Dasturiy ta'minot turlari va ularning iqtisodiy jarayonlardagi o'rni." },
+        { id: "2-2", title: "2-mavzu: Bulutli texnologiyalar", desc: "Bulutli xotira va xizmatlar, ularning qulayliklari." },
+        { id: "2-3", title: "3-mavzu: Kiberxavfsizlik", desc: "Axborotni himoya qilish va xavfsizlik asoslari." }
       ]
     },
     { 
@@ -114,9 +114,9 @@ export default function MainContent() {
       color: "bg-green-500",
       description: "Relyatsion ma'lumotlar bazalarini loyihalash, SQL hamda Big Data analitikasi.",
       topics: [
-        { id: "3-1", title: "1-mavzu: Relyatsion ma'lumotlar bazalari (DBMS)", desc: "Ma'lumotlar bazasini boshqarish tizimlari va tuzilishi." },
-        { id: "3-2", title: "2-mavzu: Big Data tahlil usullari", desc: "Katta hajmdagi ma'lumotlarni qayta ishlash texnologiyalari." },
-        { id: "3-3", title: "3-mavzu: SQL va NoSQL tizimlari", desc: "Zamonaviy so'rov tillari hamda ma'lumotlar bazasi turlari." }
+        { id: "3-1", title: "1-mavzu: Relyatsion ma’lumotlar bazalarini loyihalash", desc: "Jadvallar va ular orasidagi bog'lanishlarni loyihalash." },
+        { id: "3-2", title: "2-mavzu: SQL", desc: "Ma'lumotlar bazasi bilan ishlash uchun so'rov tili." },
+        { id: "3-3", title: "3-mavzu: Big Data analitikasi", desc: "Katta hajmdagi ma'lumotlarni tahlil qilish." }
       ]
     },
     { 
@@ -126,9 +126,9 @@ export default function MainContent() {
       color: "bg-orange-500",
       description: "Elektron tijorat, mobil tijorat hamda elektron hukumat tizimlari.",
       topics: [
-        { id: "4-1", title: "1-mavzu: Elektron tijorat va to'lovlar", desc: "FinTech, elektron hamyonlar va onlayn to'lov infratuzilmasi." },
-        { id: "4-2", title: "2-mavzu: Elektron hukumat (E-Gov)", desc: "Davlat xizmatlarini raqamlashtirish hamda e-hukumat." },
-        { id: "4-3", title: "3-mavzu: Blockchain va kripto-aktivlar", desc: "Bloklar zanjiri, smart-kontraktlar va ularning xavfsizligi." }
+        { id: "4-1", title: "1-mavzu: Elektron tijorat (E-commerce)", desc: "Internet-do'konlar va onlayn savdo." },
+        { id: "4-2", title: "2-mavzu: Mobil tijorat", desc: "Smartfon orqali savdo va xizmatlar." },
+        { id: "4-3", title: "3-mavzu: Elektron hukumat tizimlari", desc: "Davlat xizmatlarini raqamlashtirish." }
       ]
     },
     { 
@@ -138,9 +138,9 @@ export default function MainContent() {
       color: "bg-red-500",
       description: "Statistik ma'lumotlarni yig'ish va tahlil qilish.",
       topics: [
-        { id: "5-1", title: "1-mavzu: Excel/SPSS dasturlarida tahlil", desc: "Jadval muharrirlarida statistik tahlil yuritish." },
-        { id: "5-2", title: "2-mavzu: Ekonometrik modellashtirish", desc: "Iqtisodiy jarayonlar va korrelyatsiyani modellashtirish." },
-        { id: "5-3", title: "3-mavzu: Ma'lumotlarni vizualizatsiya qilish", desc: "Grafik va diagrammalar orqali tahlillarni ko'rsatish." }
+        { id: "5-1", title: "1-mavzu: Statistik ma’lumotlarni yig‘ish", desc: "Statistik ma'lumot manbalari va yig'ish usullari." },
+        { id: "5-2", title: "2-mavzu: Statistik ma’lumotlarni tahlil qilish", desc: "Statistik ma'lumotlarni qayta ishlash va tahlil usullari." },
+        { id: "5-3", title: "3-mavzu: Statistik ma’lumotlardan foydalanish", desc: "Statistik ma'lumotlar asosida iqtisodiy qaror qabul qilish." }
       ]
     },,{
       question: "Iqtisodiy ko'rsatkich bo'yicha eng ishonchli manba qaysi?",

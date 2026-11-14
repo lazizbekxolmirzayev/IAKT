@@ -105,7 +105,7 @@ function Bozor() {
             <Result name="Muvozanat narxi" value={`${num(P, 1)} ming so'm`} hint={`Soliqsiz: ${num(P0, 1)}`} />
             <Result name="Muvozanat hajmi" value={`${num(Q, 1)} birlik`} hint={`Soliqsiz: ${num(Q0, 1)}`} />
             <Result name="Hajm o'zgarishi" value={`${num(Q - Q0, 1)} birlik`} tone={Q - Q0 < 0 ? "red" : "blue"} />
-            <Result name="Soliq tushumi" value={`${num(tax, 1)} mln so'm`} tone="green" hint="soliq × hajm" />
+            <Result name="Soliq tushumi" value={`${num(tax, 1)} ming so'm`} tone="green" hint="soliq × hajm" />
           </div>
         </div>
         <div className="bg-white border border-blue-100 rounded-2xl p-3">

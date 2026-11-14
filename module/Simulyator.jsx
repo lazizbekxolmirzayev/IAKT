@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import IchkiSimulyatorlar from "@/module/IchkiSimulyatorlar";
 
 // ============================================================================
@@ -164,7 +165,7 @@ export default function Simulyatorlar() {
       </div>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-10">
         <div className="p-5 sm:p-6 bg-blue-50/60 border border-blue-100 rounded-2xl text-left text-sm text-blue-900/80 leading-relaxed">
-          <strong className="text-blue-600 font-bold">Topshiriq:</strong> simulyatorda olgan natijangizni rasmiy manba (Stat.uz, World Bank Data) bilan solishtiring va xulosangizni yozing. Batafsil ko'rsatma <a href="/iak-moduli" className="text-blue-600 font-semibold underline">IAK moduli</a> sahifasida.
+          <strong className="text-blue-600 font-bold">Topshiriq:</strong> simulyatorda olgan natijangizni rasmiy manba (Stat.uz, World Bank Data) bilan solishtiring va xulosangizni yozing. Batafsil ko'rsatma <Link href="/iak-moduli" className="text-blue-600 font-semibold underline">IAK moduli</Link> sahifasida.
         </div>
       </div>
     </section>
